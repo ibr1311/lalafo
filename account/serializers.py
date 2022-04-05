@@ -52,6 +52,7 @@ class ActivationSerializer(serializers.Serializer):
         user.activation_code = ''
         user.save()
 
+
 class LoginSerializer(serializers.Serializer):
     pass
 
