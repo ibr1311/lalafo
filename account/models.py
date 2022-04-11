@@ -70,3 +70,13 @@ class User(AbstractBaseUser):
             "test@gmail.com",
             [self.email]
         )
+
+    def send_new_password(self, new_password):
+        message = f'Ваш новый пароль: {new_password}'
+        send_mail(
+            'Восстановление пароля',
+        message,
+        'test@gmail.com',
+            [self.email]
+        )
+
