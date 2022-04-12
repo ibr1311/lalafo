@@ -40,14 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework_simplejwt',
+    'corsheaders',
     'drf_yasg',
     'rest_framework',
     'rest_framework.authtoken',
     'account',
-    'advertisement'
+    'advertisement',
+
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -149,8 +153,24 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5
 }
+
+
+#CORS_ALLOW_ALL_ORIGINS = True #запросы на ip поступают со всех адресов
+CORS_ALLOW_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:8000', #указываем ip определенных адресов
+]
+
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT', 'Token', 'Bearer'),
+    'USER_ID_FIELD': 'email',
+}
+
+

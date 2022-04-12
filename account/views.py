@@ -4,6 +4,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from account.serializers import RegistrationSerializer, LoginSerializer, ActivationSerializer, ChangePasswordSerializer, \
     ForgotPasswordSerializer
@@ -31,9 +32,12 @@ class ActivationView(APIView):
 
 
 
-class LoginView(ObtainAuthToken):
-    serializer_class = LoginSerializer
+# class LoginView(ObtainAuthToken):
+#     serializer_class = LoginSerializer
 
+
+class LoginView(TokenObtainPairView):
+    serializer_class = LoginSerializer
 
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
